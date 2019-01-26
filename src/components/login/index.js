@@ -1,6 +1,6 @@
 import React from "react"
-import { navigate } from "gatsby"
-import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { navigate, Link } from "gatsby"
+
 import { handleLogin, isLoggedIn } from "../../services/auth"
 
 class Login extends React.Component {
@@ -36,35 +36,41 @@ class Login extends React.Component {
     // }
     const {error} = this.state;
     return (
-      <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="col-md-6 col-sm-12">
-            <h1>Log in</h1>
-            { error &&
-              <Alert color="danger">
-                Incorrect Username/Password.
-              </Alert>
-            }
-            <Form
-          method="post"
-          onSubmit={event => {
-            this.handleSubmit(event)
-            //navigate(`/app/profile`)
-          }}
-        >
-          <FormGroup>
-            <Label for="username">Username</Label>
-            <Input type="text" name="username" placeholder="Username eg: john" onChange={this.handleUpdate}/>
-          </FormGroup>
-
-          <FormGroup>
-            <Label for="username">Password</Label>
-            <Input type="password" name="password" placeholder="password" onChange={this.handleUpdate}/>
-          </FormGroup>
-         
-          <Button type="submit" color="primary">Submit</Button>
-        </Form>
-          </div>
+      <div className="container qor-auth">
+        <div className="qor-auth-box">
+          { error &&
+            <ul class="errors">
+              <li>Incorrect Username/Password.</li>
+            </ul>
+          }
+          <h2>Log-in to your account</h2>
+          
+          <form
+              method="post"
+              onSubmit={event => {
+                this.handleSubmit(event)
+                //navigate(`/app/profile`)
+              }}
+          >
+            <ul class="auth-form">
+              <li>
+                <label for="username">Email</label>
+                <input type="email" name="username" placeholder="Email eg: john@example.com" onChange={this.handleUpdate}/>
+              </li>
+              <li>
+                <label for="password">Password</label>
+                <Link class="forgot-password" to="/forgot-password">Forgot Password?</Link>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" onChange={this.handleUpdate}/>
+              </li>
+              <li>
+                <button type="submit" class="button button__primary">Sign in</button>
+              </li>
+              <li>
+                <Link to="/registration" class="button button__primary">Sign Up</Link>
+              </li>
+            </ul>
+            </form>
+     
         </div>
       </div>
     )
