@@ -34,11 +34,14 @@ class NavBar extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav navbar>
-              {isLoggedIn() &&
+              {/* {isLoggedIn() &&
                 <NavItem>
                   <Link to="/app/profile" className="nav-link">Profile</Link> 
                 </NavItem>
-              }
+              } */}
+              <NavItem>
+                <Link to="/" className="nav-link">Home</Link> 
+              </NavItem>
             </Nav>
             <Nav className="ml-auto" navbar>
             {isLoggedIn() ?

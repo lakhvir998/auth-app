@@ -1,12 +1,13 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import { handleLogin, isLoggedIn } from "../../services/auth"
 
 class Login extends React.Component {
   state = {
-    username: ``,
-    password: ``,
+    username: '',
+    password: '',
+    error: false
   }
 
   handleUpdate = event => {
@@ -17,24 +18,38 @@ class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    handleLogin(this.state)
+    const {username, password} = this.state
+    if(!username || !password) {
+      this.setState({
+        error: true
+      })
+    } else
+      this.setState({
+        error: false
+      })
+      handleLogin(this.state)
   }
 
   render() {
-    if (isLoggedIn()) {
-      navigate(`/app/profile`)
-    }
-
+    // if (isLoggedIn()) {
+    //   navigate(`/app/profile`)
+    // }
+    const {error} = this.state;
     return (
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-6">
             <h1>Log in</h1>
+            { error &&
+              <Alert color="danger">
+                Incorrect Username/Password.
+              </Alert>
+            }
             <Form
           method="post"
           onSubmit={event => {
             this.handleSubmit(event)
-            navigate(`/app/profile`)
+            //navigate(`/app/profile`)
           }}
         >
           <FormGroup>

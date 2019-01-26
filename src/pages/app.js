@@ -9,7 +9,7 @@ import SignUp from "../components/signup"
 const App = () => (
   <Layout>
     <Router>
-      <PrivateRoute path="/app/profile" component={Profile} />
+      {/* <PrivateRoute path="/app/profile" component={Profile} /> */}
       <Login path="/app/login" />
       <SignUp path="/app/signup"/>
     </Router>

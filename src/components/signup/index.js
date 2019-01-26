@@ -1,13 +1,14 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { handleLogin, isLoggedIn } from "../../services/auth"
+import { Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+
 
 class SignUp extends React.Component {
   state = {
-    username: ``,
-    password: ``,
-    confirmPassword: ``
+    username: '',
+    password: '',
+    confirmPassword: '',
+    error: false
   }
 
   handleUpdate = event => {
@@ -18,26 +19,43 @@ class SignUp extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    navigate(`/app/login`)
+    const {username, password, confirmPassword} = this.state
+    if(!username || !password || !confirmPassword) {
+      this.setState({
+        error: true
+      })
+    } else {
+      this.setState({
+        error: false
+      })
+      navigate(`/app/login`)
+    }
+   
   }
 
   render() {
-    if (isLoggedIn()) {
-      navigate(`/app/profile`)
-    }
-
+    // if (isLoggedIn()) {
+    //   navigate(`/app/profile`)
+    // }
+    const {error} = this.state
+ 
     return (
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-6">
             <h1>Sign Up</h1>
+            { error &&
+              <Alert color="danger">
+                Fill required fields.
+              </Alert>
+            }
             <Form
-          method="post"
-          onSubmit={event => {
-            this.handleSubmit(event)
+              method="post"
+              onSubmit={event => {
+              this.handleSubmit(event)
             
-          }}
-        >
+              }}
+            >
           <FormGroup>
             <Label for="username">Username</Label>
             <Input type="text" name="username" placeholder="Username eg: john" onChange={this.handleUpdate}/>
