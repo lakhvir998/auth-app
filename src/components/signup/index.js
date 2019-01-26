@@ -42,7 +42,7 @@ class SignUp extends React.Component {
     return (
       <div className="container">
         <div className="row justify-content-md-center">
-          <div className="col-6">
+          <div className="col-md-6 col-sm-12">
             <h1>Sign Up</h1>
             { error &&
               <Alert color="danger">
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
             <Input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={this.handleUpdate}/>
           </FormGroup>
          
-          <Button type="submit">Submit</Button>
+          <Button type="submit" color="primary">Submit</Button>
         </Form>
           </div>
         </div>
