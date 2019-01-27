@@ -9,21 +9,24 @@ const setUser = user =>
   window.localStorage.setItem("user", JSON.stringify(user))
 
 export const handleLogin = ({ username, password }) => {
-  if (username === `john` && password === `pass`) {
-    return setUser({
-      username: `john`,
+  let resp = false;
+  if (username === `john@example.com` && password === `pass`) {
+    setUser({
       name: `Johnny`,
-      email: `johnny@example.org`,
+      email: `john@example.com`,
     })
+    resp = true
   }
+  return resp;
+    
+  
 
-  return false
 }
 
 export const isLoggedIn = () => {
   const user = getUser()
 
-  return !!user.username
+  return !!user.email
 }
 
 export const logout = (callback) => {
