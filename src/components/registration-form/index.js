@@ -28,7 +28,7 @@ class RegistrationForm extends React.Component {
       this.setState({
         error: false
       })
-      navigate(`/app/login`)
+      navigate(`/`)
     }
    
   }
